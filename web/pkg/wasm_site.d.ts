@@ -1,12 +1,15 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export function about_me(): string;
+
 export function hello(): string;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
+  readonly about_me: () => [number, number];
   readonly hello: () => [number, number];
   readonly __wbindgen_externrefs: WebAssembly.Table;
   readonly __wbindgen_free: (a: number, b: number, c: number) => void;

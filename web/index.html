@@ -7,19 +7,22 @@
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
+    <h3>  Hello, I'am    </h3>
     <h1 id="output">Loading...</h1>
     <script type="module">
-      import init, { hello } from "./pkg/wasm_site.js";
+      import init, { hello, about_me } from "./pkg/wasm_site.js";
 
       async function run() {
 
         await init();
         document.getElementById("output").textContent = hello();
+        document.getElementById("about_me").textContent = about_me();
       }
 
       run();
     </script>
 
+    
     <h2>
       <span id="typing"></span><span class="cursor">|</span>
     </h2>
@@ -55,6 +58,14 @@
 
   type();
     </script>
+
+
+<h4>
+Welcome to my corner of Internet
+</h4>              
+    
+    <h1>About Me.</h1>
+    <p id="about_me"></p>
 
   </body>
 </html>

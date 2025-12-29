@@ -64,18 +64,22 @@
 }
 
 body {
-    padding: 0px;
+    padding: 5px;
     background-image: radial-gradient(circle at 80% 110%, #e52e71 10px, var(--base), var(--mantle));
     /* background: var(--mantle); */
     background-attachment: fixed; /* This makes the background fixed */
     Color: var(--text);
 }
 
-h1 {
+p {
+    padding: 10px;
+    line-height: 20px;
+    margin-bottom: 20px;
+}
+h1 h2 h3 h4 h5 h6 {
     padding: 10px;
     font-family: 'Crete Round', serif;
     font-weight: bold;
     Color: var(--text);
-    font-size: 45px;
     margin-bottom: 20px;
 }
