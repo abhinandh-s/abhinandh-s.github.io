@@ -4,20 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello Wasm</title>
-    <link href="css/style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
   </head>
   <body>
     <h1 id="output">Loading...</h1>
     <script type="module">
-      import init, { hello } from "./pkg/hello_wasm.js";
-      
+      import init, { hello } from "./pkg/wasm_site.js";
+
       async function run() {
 
         await init();
         document.getElementById("output").textContent = hello();
       }
-      
+
       run();
     </script>
+
+    <h1>
+      <span id="typing"></span><span class="cursor">|</span>
+    </h1>
+
+    <script type="module">
+      const phrases = [
+    "Rust Developer",
+    "WebAssembly Enthusiast",
+    "Backend Engineer"
+  ];
+
+  let p = 0, i = 0;
+  const el = document.getElementById("typing");
+
+  function type() {
+    if (i < phrases[p].length) {
+      el.textContent += phrases[p][i++];
+      setTimeout(type, 80);
+    } else {
+      setTimeout(erase, 1500);
+    }
+  }
+
+  function erase() {
+    if (i > 0) {
+      el.textContent = el.textContent.slice(0, --i);
+      setTimeout(erase, 50);
+    } else {
+      p = (p + 1) % phrases.length;
+      type();
+    }
+  }
+
+  type();
+    </script>
+
   </body>
 </html>

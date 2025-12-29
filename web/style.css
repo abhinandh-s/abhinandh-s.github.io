@@ -1,0 +1,73 @@
+/* Catppuccin Mocha Color Palette */
+:root {
+    --white: hsl(220deg, 23%, 95%);
+    --white1: hsl(220deg, 22%, 92%);
+    --white2: hsl(220deg, 21%, 89%);
+    --code-bg: hsl(232deg, 23%, 18%);
+    --Rosewater: hsl(10deg, 56%, 91%);
+    --Rosewater1: hsl(10deg, 58%, 90%);
+    --Rosewater2: hsl(10deg, 57%, 88%);
+    --Flamingo: hsl(0deg, 59%, 88%);
+    --Flamingo1: hsl(0deg, 58%, 86%);
+    --Flamingo2: hsl(0deg, 59%, 84%);
+    --pink: hsl(316deg, 72%, 86%);
+    --pink1: hsl(316deg, 74%, 85%);
+    --pink2: hsl(316deg, 73%, 84%);
+    --Mauve: hsl(267deg, 84%, 81%);
+    --Mauve1: hsl(267deg, 83%, 80%);
+    --Mauve2: hsl(277deg, 59%, 76%);
+    --red: hsl(343deg, 81%, 75%);
+    --red1: hsl(351deg, 74%, 73%);
+    --red2: hsl(359deg, 68%, 71%);
+    --Maroon: hsl(350deg, 65%, 77%);
+    --Maroon1: hsl(355deg, 71%, 77%);
+    --Maroon2: hsl(358deg, 66%, 76%);
+    --Peach: hsl(23deg, 92%, 75%);
+    --Peach1: hsl(21deg, 86%, 73%);
+    --Peach2: hsl(20deg, 79%, 70%);
+    --yellow: hsl(41deg, 86%, 83%);
+    --yellow1: hsl(40deg, 70%, 78%);
+    --yellow2: hsl(40deg, 62%, 73%);
+    --green: hsl(115deg, 54%, 76%);
+    --green1: hsl(105deg, 48%, 72%);
+    --green2: hsl(96deg, 44%, 68%);
+    --teal: hsl(170deg, 57%, 73%);
+    --teal1: hsl(171deg, 47%, 69%);
+    --teal2: hsl(172deg, 39%, 65%);
+    --sky: hsl(189deg, 71%, 73%);
+    --sky1: hsl(189deg, 59%, 73%);
+    --sky2: hsl(189deg, 48%, 73%);
+    --sapphire: hsl(199deg, 76%, 69%);
+    --sapphire1: hsl(199deg, 66%, 69%);
+    --sapphire2: hsl(199deg, 55%, 69%);
+    --blue: hsl(217deg, 92%, 76%);
+    --blue1: hsl(220deg, 83%, 75%);
+    --blue2: hsl(222deg, 74%, 74%);
+    --lavender: hsl(232deg, 97%, 85%);
+    --lavender1: hsl(234deg, 82%, 85%);
+    --lavender2: hsl(239deg, 66%, 84%);
+    --text: hsl(226deg, 64%, 88%);
+    --subtext1: hsl(227deg, 35%, 80%);
+    --subtext0: hsl(228deg, 24%, 72%);
+    --overlay2: hsl(228deg, 17%, 64%);
+    --overlay1: hsl(230deg, 13%, 55%);
+    --overlay0: hsl(231deg, 11%, 47%);
+    --surface2: hsl(233deg, 12%, 39%);
+    --surface1: hsl(234deg, 13%, 31%);
+    --surface0: hsl(237deg, 16%, 23%);
+    --base2: hsl(229deg, 19%, 23%);
+    --base1: hsl(232deg, 23%, 18%);
+    --base: hsl(240deg, 21%, 15%);
+    --mantle: hsl(240deg, 21%, 12%);
+    --crust: hsl(240deg, 23%, 9%);
+    --cherryRed: #e52e71;
+}
+
+h1 {
+    padding: 10px;
+    font-family: 'Crete Round', serif;
+    font-weight: bold;
+    Color: var(--text);
+    font-size: 45px;
+    margin-bottom: 20px;
+}
