@@ -63,6 +63,14 @@
     --cherryRed: #e52e71;
 }
 
+body {
+    padding: 0px;
+    background-image: radial-gradient(circle at 80% 110%, #e52e71 10px, var(--base), var(--mantle));
+    /* background: var(--mantle); */
+    background-attachment: fixed; /* This makes the background fixed */
+    Color: var(--text);
+}
+
 h1 {
     padding: 10px;
     font-family: 'Crete Round', serif;
