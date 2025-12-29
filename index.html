@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Wasm</title>
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1 id="output">Loading...</h1>
+    <script type="module">
+      import init, { hello } from "./pkg/hello_wasm.js";
+      
+      async function run() {
+
+        await init();
+        document.getElementById("output").textContent = hello();
+      }
+      
+      run();
+    </script>
+  </body>
+</html>
