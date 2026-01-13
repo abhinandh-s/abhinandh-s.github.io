@@ -1,0 +1,6 @@
+[build]
+dist = "dist"
+jobs = 1 
+
+[serve]
+port = 8080
