@@ -26,7 +26,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       - name: Rust Cache
         uses: Swatinem/rust-cache@v2
@@ -54,7 +54,7 @@ jobs:
           version: 'latest'
 
       - name: Build with Trunk
-        run: trunk build --release && ls -la
+        run: trunk build --release --public-url "/" && ls -la
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
