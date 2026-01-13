@@ -5,10 +5,10 @@ use std::{
 };
 
 fn main() {
-    let articles_dir = Path::new("src/articles");
-    let out_file = articles_dir.join("generated.rs");
+    let articles_dir = Path::new("articles/published");
+    let out_file = Path::new("src/articles/generated.rs");
 
-    println!("cargo:rerun-if-changed=src/articles");
+    println!("cargo:rerun-if-changed=articles/published");
 
     let mut entries = fs::read_dir(articles_dir)
         .expect("Failed to read articles directory")
@@ -18,7 +18,7 @@ fn main() {
 
     entries.sort_by_key(|e| e.path());
 
-    let mut file = File::create(&out_file).expect("Failed to create generated.rs");
+    let mut file = File::create(out_file).expect("Failed to create generated.rs");
 
     writeln!(file, "// AUTO-GENERATED — DO NOT EDIT\n").unwrap();
     /*
@@ -32,7 +32,7 @@ fn main() {
     for i in entries {
         writeln!(
             file,
-            "   (\"{}\", include_str!(\"{}\")),",
+            "   (\"{}\", include_str!(\"../../articles/published/{}\")),",
             i.path()
                 .file_stem()
                 .unwrap_or_default()

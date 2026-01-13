@@ -2,6 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-.markdown-content h1 {
+@layer base {
+  @font-face {
+    font-family: "Niconne";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/assets/fonts/Niconne-Regular.ttf") format("woff2");
+  }
+  @font-face {
+    font-family: "Moderustic";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("/assets/fonts/Moderustic-VariableFont_wght.ttf") format("woff2");
+  }
 
+  .markdown-body {
+    @apply bg-latte-crust text-latte-text dark:bg-mocha-crust
+      dark:text-mocha-text;
+  }
+
+  .markdown-body .comment {
+    @apply dark:!text-mocha-subtext1;
+  }
+
+  .markdown-body .function {
+    @apply dark:!text-mocha-mauve !text-latte-mauve;
+  }
+
+  .markdown-body .string {
+    @apply dark:!text-mocha-green !text-latte-green;
+  }
+
+  /* Give links pointing to the current page a green color */
+  /*
+  a[aria-current="page"] {
+    @apply text-just-red;
+  }
+    */
+  /* Color all ancestor links of the current page */
+  /*
+    a[aria-current="true"] {
+    @apply text-just-red;
+  }
+    */
+
+  p a {
+    @apply !text-just-red;
+  }
+  pre {
+    @apply dark:!bg-mocha-base !bg-latte-base dark:!text-mocha-text
+      !text-latte-text;
+  }
 }

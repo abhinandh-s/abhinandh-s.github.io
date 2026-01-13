@@ -1,6 +1,9 @@
 // use ::yew_router::prelude::*;
 use yew::prelude::*;
 
+use crate::articles::get_all_articles;
+use crate::pages::post::ArticleEntry;
+
 #[function_component(HomePage)]
 pub fn home_page() -> Html {
     html! {
@@ -44,7 +47,11 @@ pub fn home_page() -> Html {
                     </span>
                   </h1>
                   <ul class="mt-8">
-           //         {posts.map((post) => <PostEntry post={post} />)}
+                  {
+                    for get_all_articles().into_iter().map(|articles| {
+                        html! { <ArticleEntry post_id={articles.id} /> }
+                    })
+                  }
                   </ul>
                 </div>
 

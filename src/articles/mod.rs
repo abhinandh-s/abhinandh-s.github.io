@@ -1,11 +1,5 @@
-#![allow(unused)]
-
-use std::fs::read_to_string;
-
-use chrono::Datelike;
 use pulldown_cmark::{Parser, html};
 use serde::{Deserialize, Serialize};
-use walkdir::{DirEntry, WalkDir};
 
 mod generated;
 
@@ -26,7 +20,6 @@ pub struct FrontMatter {
     pub tags: Option<Vec<String>>,
 }
 
-#[allow(clippy::vec_init_then_push)]
 pub fn get_all_articles() -> Vec<Article> {
     let mut articles = Vec::new();
     let mut dbg = String::new();
@@ -44,58 +37,20 @@ pub fn get_all_articles() -> Vec<Article> {
             Err(err) => dbg.push_str(err.to_string().as_str()),
         }
     }
-
-
-    articles.push(Article {
-        id: "post".into(),
-        matter: FrontMatter {
-            title: "This is title".into(),
-            published_at: "2026-01-13".into(),
-            snippet: "snippet for post".into(),
-            tags: None,
-        },
-        content: format!("This is the content:\n dbg:\n{}\n\n", dbg),
-    });
     articles
-}
-
-fn is_markdown(entry: &DirEntry) -> bool {
-    entry
-        .file_name()
-        .to_str()
-        .map(|s| s.ends_with(".md"))
-        .unwrap_or(false)
 }
 
 // input: `2026-01-12 21:34`
 // return it as [`Monday, November 25, 2024`]
-pub fn date_time(published_at: &str) -> String {
-    chrono::DateTime::parse_from_str(published_at, "%Y %b %d")
-        .map(|date_time| {
-            let s = match date_time.month() {
-                1 => "Jan",
-                2 => "Feb",
-                3 => "Mar",
-                4 => "Apr",
-                5 => "May",
-                6 => "Jun",
-                7 => "Jul",
-                8 => "Aug",
-                9 => "Sep",
-                10 => "Oct",
-                11 => "Nov",
-                12 => "Dec",
-                _ => "Unreachable arm",
-            };
-            format!(
-                "{}, {} {}, {}",
-                date_time.weekday(),
-                s,
-                date_time.day(),
-                date_time.year()
-            )
-        })
-        .unwrap_or_default()
+pub fn date_time(input: &str) -> String {
+    // 1. Parse the input string based on its format
+    // %Y-%m-%d %H:%M matches "YYYY-MM-DD HH:MM"
+    match chrono::NaiveDate::parse_from_str(input, "%Y-%m-%d") {
+    // 2. Format it to the desired output: "Monday, January 12, 2026"
+    // %A = Full weekday, %B = Full month, %e = Day of month, %Y = Year
+        Ok(date_time) => date_time.format("%A, %B %e, %Y").to_string(),
+        Err(err) => err.to_string(),
+    }
 }
 
 pub fn get_article_by_id(id: &str) -> Option<Article> {
