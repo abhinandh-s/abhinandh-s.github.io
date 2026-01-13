@@ -2,4 +2,4 @@ dev:
   nix develop
 
 serve:
-  trunk serve
+  trunk serve --poll --poll-interval 10s

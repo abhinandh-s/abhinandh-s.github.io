@@ -13,9 +13,11 @@ pub fn article_entry(props: &ArticleProps) -> Html {
         Some(article) => {
             html! {
                 <li class="border-t py-2">
-                    <a href={format!("/articles/{}", article.id)} class="py-2 flex group gap-4">
-                    <h2>{ article.matter.title }</h2>
-                    <p> { article.matter.snippet } </p>
+                    <a href={format!("/#/articles/{}", article.id)} class="py-2 flex group gap-4">
+                    <div>
+                        <h2 class="font-bold group-hover:underline">{ article.matter.title }</h2>
+                        <p class="text-gray-600"> { article.matter.snippet } </p>
+                    </div>
                     </a>
                 </li>
             }
