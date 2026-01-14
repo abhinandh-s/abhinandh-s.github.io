@@ -7,24 +7,7 @@ use yew::prelude::*;
 
 use crate::articles::{get_article_by_id, get_date, markdown_to_html};
 
-#[function_component(ArticleEntry)]
-pub fn article_entry(props: &ArticleProps) -> Html {
-    match get_article_by_id(&props.post_id) {
-        Some(article) => {
-            html! {
-                <li class="border-t py-2">
-                    <a href={format!("/#/articles/{}", article.id)} class="py-2 flex group gap-4">
-                    <div>
-                        <h2 class="font-bold group-hover:underline">{ article.matter.title }</h2>
-                        <p class="text-gray-600"> { article.matter.snippet } </p>
-                    </div>
-                    </a>
-                </li>
-            }
-        }
-        None => html!(),
-    }
-}
+
 
 #[function_component(ArticleEntryWithDate)]
 pub fn article_entry_with_date(props: &ArticleProps) -> Html {
@@ -74,7 +57,7 @@ pub fn article(props: &ArticleProps) -> Html {
 
             html! {
               <>
-                <crate::pages::home::Header />
+                <crate::components::header::Header />
 
                 <div class="p-4 mx-auto max-w-3xl flex flex-col justify-center">
                   <h1 class="font-bold mt-12">{ date }</h1>
@@ -84,7 +67,7 @@ pub fn article(props: &ArticleProps) -> Html {
                     { ctx }
                   </div>
 
-                  <crate::pages::home::Footer />
+                  <crate::components::footer::Footer />
                 </div>
               </>
             }

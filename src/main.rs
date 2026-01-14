@@ -7,6 +7,7 @@ use self::pages::post::Article;
 mod articles;
 mod pages;
 mod route;
+mod components;
 
 fn main() {
     yew::Renderer::<App>::new().render();
