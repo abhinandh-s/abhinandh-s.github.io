@@ -1,4 +1,7 @@
 use yew::prelude::*;
+use yew_router::prelude::Link;
+
+use crate::route::Route;
 
 #[function_component(Header)]
 pub fn header() -> Html {
@@ -11,8 +14,14 @@ pub fn header() -> Html {
     //          {/* Desktop Menu */}
                 <div class="flex max-tablet:hidden space-x-16 mt-12 pb-7 px-16">
                   // <ThemeToggle />
+                   //  <nav>
+                   //    <ul>
+                   //      <li><Link<Route> to={Route::Home}>{ "Home" }</Link<Route>></li>
+                   //      <li><Link<Route> to={Route::ArticlesRoute}>{ "Articles" }</Link<Route>></li>
+                   //    </ul>
+                   // </nav>
                   <a
-                   // href="/"
+                    href="/"
                     class="hover:text-just-red aria-[current='page']:text-just-red"
                   >
                   { "Home" }
@@ -24,7 +33,7 @@ pub fn header() -> Html {
                   { "Portfolio" }
                   </a>
                   <a
-                    // href="/articles"
+                    href="/#/articles"
                     class="hover:text-just-red aria-[current]:text-just-red"
                   >
                   { "Articles" }
@@ -45,4 +54,3 @@ pub fn header() -> Html {
           </>
           }
 }
-

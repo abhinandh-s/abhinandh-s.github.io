@@ -34,15 +34,19 @@ pub fn article_entry_with_date(props: &ArticleProps) -> Html {
 #[function_component(ArticleIndex)]
 pub fn article_index() -> Html {
     html! {
-      <div class="p-4 mx-auto max-w-3xl flex flex-col justify-center">
-        <ul class="mt-8">
-          {
-            for crate::articles::get_all_articles().into_iter().map(|articles| {
-              html! { <ArticleEntryWithDate post_id={articles.id} /> }
-            })
-          }
-        </ul>
-      </div>
+      <>
+        <crate::components::header::Header />
+        <div class="p-4 mx-auto max-w-3xl flex flex-col justify-center">
+          <ul class="mt-8">
+            {
+              for crate::articles::get_all_articles().into_iter().map(|articles| {
+                html! { <ArticleEntryWithDate post_id={articles.id} /> }
+              })
+            }
+          </ul>
+          <crate::components::footer::Footer />
+        </div>
+      </>
     }
 }
 
