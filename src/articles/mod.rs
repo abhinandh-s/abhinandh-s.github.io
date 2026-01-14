@@ -1,5 +1,4 @@
 use comrak::plugins::syntect::SyntectAdapterBuilder;
-use pulldown_cmark::{Parser, html};
 use serde::{Deserialize, Serialize};
 
 mod generated;
@@ -52,7 +51,7 @@ pub fn get_date(input: &str, long: bool) -> String {
         Ok(date_time) => {
             match long {
                 true => date_time.format("%A, %B %e, %Y").to_string(),
-                false => date_time.format("%A, %B %e, %Y").to_string(),
+                false => date_time.format("%b, %d, %Y").to_string(),
             }
             
         },
