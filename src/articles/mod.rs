@@ -83,9 +83,13 @@ pub fn get_article_by_id(id: &str) -> Option<Article> {
     get_all_articles().into_iter().find(|f| f.id == id)
 }
 
-
+/*
+ base16-ocean.dark,base16-eighties.dark,base16-mocha.dark,base16-ocean.light
+InspiredGitHub from here
+Solarized (dark) and Solarized (light)
+ */
 pub fn markdown_to_html(source: &str) -> String {
-    let adapter = SyntectAdapterBuilder::new().theme("InspiredGitHub").build();
+    let adapter = SyntectAdapterBuilder::new().theme("base16-mocha.dark").build();
     let options = comrak::Options::default();
     let mut plugins = comrak::options::Plugins::default();
 
