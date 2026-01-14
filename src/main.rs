@@ -24,19 +24,8 @@ fn app() -> Html {
 fn switch(routes: Route) -> Html {
     match routes {
         Route::Home => html! { <pages::home::HomePage /> },
-        Route::NotFound => {
-            html! {
-                <>
-                      <h1 class="text-4xl font-bold"> { "404 - Page not found" }</h1>
-          <p class="my-4">
-          { "The page you were looking for doesn't exist." }
-          </p>
-          <a href="/" class="underline">{ "Go back home" }</a>
-
-                </>
-            }
-        }
         Route::Articles { id } => html! { <Article post_id={id} /> },
         Route::ArticlesRoute => html! { <pages::post::ArticleIndex /> },
+        Route::NotFound => html! { <pages::_404::NotFound /> },
     }
 }
