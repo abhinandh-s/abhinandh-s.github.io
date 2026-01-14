@@ -16,7 +16,7 @@ pub fn article_entry_with_date(props: &ArticleProps) -> Html {
             let date = get_date(article.matter.published_at.as_str(), false);
 
             html! {
-              <li class="border-t border-mocha-mantle dark:text-mocha-surface2 py-2">
+              <li class="border-t broder-latte-text dark:border-mocha-text py-2">
                 <a href={format!("/#/articles/{}", article.id)} class="py-2 flex group gap-4">
                 <div class="w-24 shrink-0"> { date } </div>
                   <div>
@@ -47,6 +47,7 @@ pub fn article_index() -> Html {
               })
             }
           </ul>
+          <div class="border-b broder-latte-text dark:border-mocha-text"></div>
           <crate::components::footer::Footer />
         </div>
       </>
