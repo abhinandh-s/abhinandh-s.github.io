@@ -31,7 +31,7 @@
   }
 
   pre {
-    @apply !bg-latte-mantle dark:!bg-mocha-mantle 
+    @apply !bg-mocha-base dark:!bg-mocha-mantle 
            !text-latte-text dark:!text-mocha-text 
            p-4 overflow-x-auto rounded-md my-6; 
     font-family: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace;
