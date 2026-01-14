@@ -66,7 +66,7 @@ pub fn home_page() -> Html {
 }
 
 #[function_component(ArticleEntry)]
-pub fn article_entry(props: &super::post::ArticleProps) -> Html {
+pub fn article_entry(props: &super::articles::ArticleProps) -> Html {
     match crate::articles::get_article_by_id(&props.post_id) {
         Some(article) => {
             html! {

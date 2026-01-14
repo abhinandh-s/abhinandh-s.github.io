@@ -5,6 +5,8 @@ use yew_router::prelude::*;
 pub enum Route {
     #[at("/")]
     Home,
+    #[at("/portfolio")]
+    Portfolio,
     #[at("/articles")]
     ArticlesRoute,
     #[at("/articles/:id")]

@@ -2,12 +2,12 @@ use route::Route;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
-use self::pages::post::Article;
+use self::pages::articles::Article;
 
 mod articles;
+mod components;
 mod pages;
 mod route;
-mod components;
 
 fn main() {
     yew::Renderer::<App>::new().render();
@@ -25,8 +25,9 @@ fn app() -> Html {
 fn switch(routes: Route) -> Html {
     match routes {
         Route::Home => html! { <pages::home::HomePage /> },
+        Route::Portfolio => html! { <pages::portfolio::Portfolio /> },
         Route::Articles { id } => html! { <Article post_id={id} /> },
-        Route::ArticlesRoute => html! { <pages::post::ArticleIndex /> },
+        Route::ArticlesRoute => html! { <pages::articles::ArticleIndex /> },
         Route::NotFound => html! { <pages::_404::NotFound /> },
     }
 }

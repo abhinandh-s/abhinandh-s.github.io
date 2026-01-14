@@ -10,7 +10,7 @@ pub fn footer() -> Html {
         <div class="flex justify-center">
           <a
             class="p-2"
-            href="https://github.com/abhi-xyz/"
+            href="https://github.com/abhinandh-s/"
             target="_blank"
           >
             <svg
@@ -65,7 +65,7 @@ pub fn footer() -> Html {
               <circle cx="5" cy="19" r="1"></circle>
             </svg>
           </a>
-          <a class="p-2" href="https://x.com/Ungraduate_Abhi" target="_blank">
+          <a class="p-2" href="https://x.com/abhinandh_s_" target="_blank">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -124,4 +124,3 @@ pub fn footer() -> Html {
       </footer>
     }
 }
-
