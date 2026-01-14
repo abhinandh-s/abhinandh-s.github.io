@@ -1,3 +1,4 @@
+use comrak::plugins::syntect::SyntectAdapterBuilder;
 use pulldown_cmark::{Parser, html};
 use serde::{Deserialize, Serialize};
 
@@ -42,13 +43,19 @@ pub fn get_all_articles() -> Vec<Article> {
 
 // input: `2026-01-12 21:34`
 // return it as [`Monday, November 25, 2024`]
-pub fn date_time(input: &str) -> String {
+pub fn get_date(input: &str, long: bool) -> String {
     // 1. Parse the input string based on its format
     // %Y-%m-%d %H:%M matches "YYYY-MM-DD HH:MM"
     match chrono::NaiveDate::parse_from_str(input, "%Y-%m-%d") {
     // 2. Format it to the desired output: "Monday, January 12, 2026"
     // %A = Full weekday, %B = Full month, %e = Day of month, %Y = Year
-        Ok(date_time) => date_time.format("%A, %B %e, %Y").to_string(),
+        Ok(date_time) => {
+            match long {
+                true => date_time.format("%A, %B %e, %Y").to_string(),
+                false => date_time.format("%A, %B %e, %Y").to_string(),
+            }
+            
+        },
         Err(err) => err.to_string(),
     }
 }
@@ -57,10 +64,12 @@ pub fn get_article_by_id(id: &str) -> Option<Article> {
     get_all_articles().into_iter().find(|f| f.id == id)
 }
 
-pub fn markdown_to_html(md: &str) -> String {
-    let options = pulldown_cmark::Options::all();
-    let parser = Parser::new_ext(md, options);
-    let mut html_output = String::new();
-    html::push_html(&mut html_output, parser);
-    html_output
+
+pub fn markdown_to_html(source: &str) -> String {
+    let adapter = SyntectAdapterBuilder::new().theme("InspiredGitHub").build();
+    let options = comrak::Options::default();
+    let mut plugins = comrak::options::Plugins::default();
+
+    plugins.render.codefence_syntax_highlighter = Some(&adapter);
+    comrak::markdown_to_html_with_plugins(source, &options, &plugins)
 }

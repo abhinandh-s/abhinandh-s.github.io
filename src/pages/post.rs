@@ -5,7 +5,7 @@ pub struct ArticleProps {
 
 use yew::prelude::*;
 
-use crate::articles::{date_time, get_article_by_id, markdown_to_html};
+use crate::articles::{get_date, get_article_by_id, markdown_to_html};
 
 #[function_component(ArticleEntry)]
 pub fn article_entry(props: &ArticleProps) -> Html {
@@ -69,7 +69,7 @@ pub fn article(props: &ArticleProps) -> Html {
             let html_content = markdown_to_html(&post.content);
             let ctx = Html::from_html_unchecked(html_content.into());
             let org = post.matter.published_at;
-            let date = date_time(org.clone().as_str());
+            let date = get_date(org.clone().as_str(), true);
 
             html! {
                 <>
