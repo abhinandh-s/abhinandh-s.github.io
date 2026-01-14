@@ -42,7 +42,7 @@ pub fn article_index() -> Html {
           </h1>
           <ul class="mt-8">
             {
-              for crate::articles::get_all_articles().into_iter().map(|articles| {
+              for crate::articles::get_all_articles_sorted().into_iter().map(|articles| {
                 html! { <ArticleEntryWithDate post_id={articles.id} /> }
               })
             }

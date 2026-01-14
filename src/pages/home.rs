@@ -1,7 +1,7 @@
 // use ::yew_router::prelude::*;
 use yew::prelude::*;
 
-use crate::articles::get_all_articles;
+use crate::articles::{get_all_articles, get_all_articles_sorted};
 use crate::components::footer::Footer;
 use crate::components::header::Header;
 
@@ -49,7 +49,7 @@ pub fn home_page() -> Html {
                   </h1>
                   <ul class="mt-8">
                   {
-                    for get_all_articles().into_iter().map(|articles| {
+                    for get_all_articles_sorted().into_iter().map(|articles| {
                         html! { <ArticleEntry post_id={articles.id} /> }
                     })
                   }

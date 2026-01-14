@@ -40,6 +40,18 @@ pub fn get_all_articles() -> Vec<Article> {
     articles
 }
 
+pub fn get_all_articles_sorted() -> Vec<Article> {
+    let mut articles = get_all_articles();
+
+    // Sort by date in descending order (latest first)
+    articles.sort_by(|a, b| {
+        // We compare b to a to achieve descending order
+        b.matter.published_at.cmp(&a.matter.published_at)
+    });
+
+    articles
+}
+
 // input: `2026-01-12 21:34`
 // return it as [`Monday, November 25, 2024`]
 pub fn get_date(input: &str, long: bool) -> String {
