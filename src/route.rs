@@ -1,5 +1,6 @@
 use yew_router::prelude::*;
 
+#[allow(clippy::enum_variant_names)]
 #[derive(Clone, Routable, PartialEq)]
 pub enum Route {
     #[at("/")]

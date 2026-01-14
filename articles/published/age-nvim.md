@@ -1,7 +1,7 @@
 ---
 title: age.nvim
 published_at: 2024-12-10
-updated_at: Monday, December 10, 2024
+updated_at: 2026-01-14 
 snippet: Neovim plugin for encrypting and decrypting text files inside neovim using `age` with ease.
 ---
 

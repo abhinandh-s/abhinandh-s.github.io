@@ -1,7 +1,7 @@
 ---
 title: Hello World
-published_at: 2024-06-26T13:49:37.703Z
-updated_at: 2024-06-26T13:49:37.703Z
+published_at: 2024-06-26
+updated_at: 2024-06-26
 snippet: My first blog entry.
 ---
 

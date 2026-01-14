@@ -1,7 +1,7 @@
 ---
 title: roxide
-published_at: 2024-11-25T06:54:03.749Z
-updated_at: Monday, November 28, 2024
+published_at: 2024-11-25
+updated_at: 2026-01-14
 snippet: A lightweight, high-performance alternative to the traditional rm command, written in rust.
 ---
 

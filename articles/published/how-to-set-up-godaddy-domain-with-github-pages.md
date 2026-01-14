@@ -1,7 +1,7 @@
 ---
 title: How to Set Up GoDaddy Domain With GitHub Pages
-published_at: 2024-10-19T09:10:47.703Z
-updated_at: 2024-10-19T09:10:47.703Z
+published_at: 2024-10-19
+updated_at: 2024-10-19
 snippet: How to Set Up GoDaddy Domain With GitHub Pages.
 ---
 
