@@ -11,6 +11,8 @@ pub enum Route {
     ArticlesRoute,
     #[at("/articles/:id")]
     Articles { id: String },
+    #[at("/about")]
+    About,
     #[not_found]
     #[at("/404")]
     NotFound,
