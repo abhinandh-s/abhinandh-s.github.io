@@ -21,7 +21,7 @@ pub fn article_entry_with_date(props: &ArticleProps) -> Html {
                 <div class="w-24 shrink-0"> { date } </div>
                   <div>
                     <h2 class="font-bold group-hover:underline">{ article.matter.title }</h2>
-                    <p class="text-gray-600"> { article.matter.snippet } </p>
+                    <p class=""> { article.matter.snippet } </p>
                   </div>
                 </a>
               </li>

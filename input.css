@@ -22,19 +22,46 @@
     @apply bg-latte-crust text-latte-text dark:bg-mocha-crust dark:text-mocha-text;
   }
 
+  pre {
+    @apply !bg-latte-mantle dark:!bg-mocha-mantle 
+           !text-latte-text dark:!text-mocha-text 
+           p-4 overflow-x-auto rounded-md my-6; 
+    font-family: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace;
+  }
+
+  /* Syntax Highlighting (Tokens) */
+  pre .keyword  { @apply !text-latte-mauve dark:!text-mocha-mauve font-bold; }
+  pre .string   { @apply !text-latte-green dark:!text-mocha-green; }
+  pre .comment  { @apply !text-latte-overlay1 dark:!text-mocha-overlay1 italic; }
+  pre .function { @apply !text-latte-blue dark:!text-mocha-blue; }
+  pre .type     { @apply !text-latte-yellow dark:!text-mocha-yellow; }
+  pre .constant { @apply !text-latte-peach dark:!text-mocha-peach; }
+
+  /* Inline code snippets within paragraphs */
+  :not(pre) > code {
+    @apply bg-latte-surface0 dark:bg-mocha-surface0 
+           text-just-red px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+
   /* 1. The Code Block Container */
+  /*
   .markdown-body pre {
     @apply my-6 p-4 overflow-x-auto rounded-lg border;
+   */
     /* Dark mode: Mocha shades | Light mode: Latte shades */
+  /*
     @apply dark:bg-mocha-base dark:border-mocha-surface0 bg-latte-base border-latte-surface0;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
   }
+   */
 
   /* 2. Inline Code (the one inside paragraphs) */
+  /*
   .markdown-body :not(pre) > code {
     @apply px-1.5 py-0.5 rounded font-mono text-sm;
     @apply dark:bg-mocha-surface0 bg-latte-surface0 text-just-red;
   }
+   */
 
   /* Give links pointing to the current page a green color */
   /*
