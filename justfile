@@ -2,7 +2,7 @@ dev:
   nix develop
 
 serve:
-  trunk serve --poll --poll-interval 10s
+  taskset -c 0,1 trunk serve
 
 ship:
    git add -A && git commit -m "migration" && git push
