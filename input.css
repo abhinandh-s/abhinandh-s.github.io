@@ -19,18 +19,19 @@
   }
 
 
-  h2 {
+  .markdown-body h2 {
     @apply text-2xl font-bold my-2;
   }
  
-  h3 {
+  .markdown-body h3 {
     @apply font-bold my-2;
   }
+
   .markdown-body {
     @apply bg-latte-crust text-latte-text dark:bg-mocha-crust dark:text-mocha-text;
   }
 
-  pre {
+  .markdown-body pre {
     @apply !bg-mocha-base dark:!bg-mocha-mantle 
            !text-latte-text dark:!text-mocha-text 
            p-4 overflow-x-auto rounded-md my-6; 
@@ -39,40 +40,21 @@
 
   /* --- Expanded Syntax Highlighting --- */
 
-  /* Keywords & Control (if, else, return, match, fn, pub) */
+  /* 
   pre .keyword, pre .control { @apply !text-latte-mauve dark:!text-mocha-mauve font-bold; }
-
-  /* Functions & Methods */
   pre .function, pre .method { @apply !text-latte-blue dark:!text-mocha-blue; }
-
-  /* Strings & Characters */
   pre .string, pre .char { @apply !text-latte-green dark:!text-mocha-green; }
-
-  /* Comments */
   pre .comment { @apply !text-latte-overlay1 dark:!text-mocha-overlay1 italic; }
-
-  /* Types (struct, enum, i32, String, Vec) */
   pre .type, pre .class, pre .interface { @apply !text-latte-yellow dark:!text-mocha-yellow; }
-
-  /* Constants & Booleans (true, false, SOME_CONST) */
   pre .constant, pre .boolean, pre .language { @apply !text-latte-peach dark:!text-mocha-peach; }
-
-  /* Numbers */
   pre .number { @apply !text-latte-peach dark:!text-mocha-peach; }
-
-  /* Operators (+, -, *, /, =>, ->, =) */
   pre .operator { @apply !text-latte-sky dark:!text-mocha-sky; }
-
-  /* Variables & Attributes (self, #[derive]) */
   pre .variable, pre .parameter { @apply !text-latte-text dark:!text-mocha-text; }
   pre .attribute, pre .annotation { @apply !text-latte-blue dark:!text-mocha-blue italic; }
-
-  /* Markdown Specific (Headers, Links in code blocks) */
   pre .heading { @apply !text-latte-red dark:!text-mocha-red font-bold; }
   pre .link { @apply !text-latte-rosewater dark:!text-mocha-rosewater underline; }
-
-  /* Punctuation (Brackets, Semicolons) */
   pre .punctuation { @apply !text-latte-overlay2 dark:!text-mocha-overlay2; }
+  */
 
   /* Inline code snippets within paragraphs */
   :not(pre) > code {
