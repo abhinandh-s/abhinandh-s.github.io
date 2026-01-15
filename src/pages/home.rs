@@ -35,5 +35,5 @@ pub fn home_page() -> Html {
           <Footer />
           </div>
       </>
-        }
+    }
 }
