@@ -5,6 +5,7 @@ updated_at: 2026-01-14
 snippet: A lightweight, high-performance alternative to the traditional rm command, written in rust.
 ---
 
+
 `roxide` is a lightweight, high-performance alternative to the traditional `rm`
 command, designed with an emphasis on speed and data preservation. Unlike
 standard rm, which permanently deletes files, roxide safely moves them to a

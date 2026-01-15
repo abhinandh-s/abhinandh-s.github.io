@@ -1894,6 +1894,7 @@ dependencies = [
  "gray_matter",
  "pulldown-cmark",
  "serde",
+ "serde_json",
  "walkdir",
  "wasm-bindgen",
  "yew",

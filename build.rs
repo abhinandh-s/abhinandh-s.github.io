@@ -1,5 +1,5 @@
 use std::{
-    fs::{self, File},
+    fs::{self, File, read_to_string},
     io::Write,
     path::Path,
 };
@@ -37,13 +37,244 @@ fn main() {
                 .file_stem()
                 .unwrap_or_default()
                 .to_string_lossy()
-                .to_string().as_str(),
+                .to_string()
+                .as_str(),
             i.path()
                 .file_name()
                 .unwrap_or_default()
-                .to_string_lossy().to_string().as_str()
+                .to_string_lossy()
+                .to_string()
+                .as_str()
         )
         .unwrap();
     }
     writeln!(file, "];").unwrap();
+
+    let _e = get_all_articles();
+
+    let out_file = Path::new("feed.json");
+    let mut json_feed = File::create(out_file).expect("Failed to create feed.json");
+    write!(json_feed, "{}", generate_json_feed()).unwrap();
+}
+
+use serde::{Deserialize, Serialize};
+
+#[derive(Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Article {
+    pub id: String,
+    pub matter: FrontMatter,
+    pub content: String,
+}
+
+// The default `Pod` data type can be a bit unwieldy, so
+// you can also deserialize it into a custom struct
+#[derive(Default, Deserialize, Debug, Clone, PartialEq, Eq, Serialize)]
+pub struct FrontMatter {
+    pub title: String,
+    pub published_at: String,
+    pub snippet: String,
+    pub tags: Option<Vec<String>>,
+}
+
+pub enum FileName {
+    Stem,
+    Ext,
+    Full,
+}
+
+pub fn path_as_string(path: &Path, f: FileName) -> String {
+    match f {
+        FileName::Stem => path
+            .file_stem()
+            .map(|f| f.to_string_lossy().to_string())
+            .unwrap_or_default(),
+        FileName::Ext => path
+            .extension()
+            .map(|f| f.to_string_lossy().to_string())
+            .unwrap_or_default(),
+        FileName::Full => path
+            .file_name()
+            .map(|f| f.to_string_lossy().to_string())
+            .unwrap_or_default(),
+    }
+}
+
+pub fn get_all_articles() -> Vec<Article> {
+    let mut articles = Vec::new();
+    let mut dbg = String::new();
+    let articles_dir = Path::new("articles/published");
+    let articles_out_dir = Path::new("assets/articles/generated");
+    let mut entries = fs::read_dir(articles_dir)
+        .expect("Failed to read articles directory")
+        .filter_map(Result::ok)
+        .filter(|e| e.path().extension().and_then(|s| s.to_str()) == Some("md"))
+        .collect::<Vec<_>>();
+
+    entries.sort_by_key(|e| e.path());
+
+    for i in entries {
+        let ctx =
+            read_to_string(i.path().to_string_lossy().to_string().as_str()).unwrap_or_default();
+        let matter = gray_matter::Matter::<gray_matter::engine::YAML>::new();
+        match matter.parse::<FrontMatter>(&ctx) {
+            Ok(result) => {
+                let md = result.content.clone();
+                let html = markdown_to_html(&md);
+                let mut file = File::create(articles_out_dir.join(format!(
+                    "{}.html",
+                    path_as_string(&i.path(), FileName::Stem)
+                )))
+                .expect("Failed to create generated.rs");
+                write!(file, "{}", html).unwrap();
+
+                let matter = serde_json::to_string_pretty(&result.matter).unwrap_or_default();
+                let mut file = File::create(articles_out_dir.join(format!(
+                    "{}.json",
+                    path_as_string(&i.path(), FileName::Stem)
+                )))
+                .expect("Failed to create generated.rs");
+                write!(file, "{}", matter).unwrap();
+
+                articles.push(Article {
+                    id: i
+                        .path()
+                        .file_stem()
+                        .unwrap_or_default()
+                        .to_string_lossy()
+                        .to_string(),
+                    matter: result.data.unwrap_or_default(),
+                    content: result.content,
+                });
+            }
+            Err(err) => dbg.push_str(err.to_string().as_str()),
+        }
+    }
+
+    articles
+}
+
+pub fn get_all_articles_sorted() -> Vec<Article> {
+    let mut articles = get_all_articles();
+
+    // Sort by date in descending order (latest first)
+    articles.sort_by(|a, b| {
+        // We compare b to a to achieve descending order
+        b.matter.published_at.cmp(&a.matter.published_at)
+    });
+
+    articles
+}
+
+// For home page
+pub fn get_recently_add(limit: usize) -> Vec<Article> {
+    get_all_articles_sorted().into_iter().take(limit).collect()
+}
+
+// input: `2026-01-12 21:34`
+// return it as [`Monday, November 25, 2024`]
+pub fn get_date(input: &str, long: bool) -> String {
+    // 1. Parse the input string based on its format
+    // %Y-%m-%d %H:%M matches "YYYY-MM-DD HH:MM"
+    match chrono::NaiveDate::parse_from_str(input, "%Y-%m-%d") {
+        // 2. Format it to the desired output: "Monday, January 12, 2026"
+        // %A = Full weekday, %B = Full month, %e = Day of month, %Y = Year
+        Ok(date_time) => match long {
+            true => date_time.format("%A, %B %e, %Y").to_string(),
+            false => date_time.format("%b %d, %Y").to_string(),
+        },
+        Err(err) => err.to_string(),
+    }
+}
+
+pub fn get_article_by_id(id: &str) -> Option<Article> {
+    get_all_articles().into_iter().find(|f| f.id == id)
+}
+
+/*
+ base16-ocean.dark,base16-eighties.dark,base16-mocha.dark,base16-ocean.light
+InspiredGitHub from here
+Solarized (dark) and Solarized (light)
+ */
+pub fn markdown_to_html(source: &str) -> String {
+    let adapter = comrak::plugins::syntect::SyntectAdapterBuilder::new()
+        .theme("base16-ocean.dark")
+        .build();
+    let options = comrak::Options::default();
+    let mut plugins = comrak::options::Plugins::default();
+
+    plugins.render.codefence_syntax_highlighter = Some(&adapter);
+    comrak::markdown_to_html_with_plugins(source, &options, &plugins)
+}
+
+pub const VERSION: &str = "https://jsonfeed.org/version/1.1";
+pub const TITLE: &str = "Abhi's Feed";
+pub const HOME_PAGE_URL: &str = "https://abhinandh-s.github.io/#/";
+pub const FEED_URL: &str = "https://abhinandh-s.github.io/#/feed.json";
+pub const DESCRIPTION: &str = "Json feed for articles written by Abhinandh S";
+pub const ICON: &str = "https://example.org/favicon-timeline-512x512.png";
+pub const FAVICON: &str = "https://example.org/favicon-sourcelist-64x64.png";
+pub const LANGUAGE: &str = "en-US";
+
+#[derive(Serialize)]
+struct JsonFeed {
+    version: String,
+    language: String,
+    title: String,
+    home_page_url: String,
+    feed_url: String,
+    items: Vec<JsonFeedItem>,
+}
+
+#[derive(Serialize)]
+struct JsonFeedItem {
+    id: String,
+    url: String,
+    title: String,
+    content_html: String,
+    date_published: String, // ISO 8601 format
+    summary: Option<String>,
+    banner_image: Option<String>,
+}
+
+fn generate_json_feed() -> String {
+    let articles = get_all_articles_sorted();
+    let items: Vec<JsonFeedItem> = articles
+        .into_iter()
+        .map(|article| JsonFeedItem {
+            id: article.id.clone(),
+            url: format!("{}articles/{}", HOME_PAGE_URL, article.id),
+            title: article.matter.title,
+            content_html: article.content,
+            date_published: format_rfc3339(&article.matter.published_at),
+            summary: Some(article.matter.snippet),
+            banner_image: None,
+        })
+        .collect();
+    let feed = JsonFeed {
+        version: VERSION.into(),
+        language: LANGUAGE.into(),
+        title: TITLE.into(),
+        home_page_url: HOME_PAGE_URL.into(),
+        feed_url: FEED_URL.into(),
+        items,
+    };
+    serde_json::to_string_pretty(&feed).unwrap_or_default()
+}
+
+pub fn format_rfc3339(input: &str) -> String {
+    // Try parsing as YYYY-MM-DD HH:MM first
+    if let Ok(dt) = chrono::NaiveDateTime::parse_from_str(input, "%Y-%m-%d %H:%M") {
+        return chrono::DateTime::<chrono::Utc>::from_naive_utc_and_offset(dt, chrono::Utc)
+            .to_rfc3339_opts(chrono::SecondsFormat::Secs, true);
+    }
+
+    // Fallback to YYYY-MM-DD and assume midnight UTC
+    if let Ok(d) = chrono::NaiveDate::parse_from_str(input, "%Y-%m-%d") {
+        let dt = d.and_hms_opt(0, 0, 0).unwrap();
+        return chrono::DateTime::<chrono::Utc>::from_naive_utc_and_offset(dt, chrono::Utc)
+            .to_rfc3339_opts(chrono::SecondsFormat::Secs, true);
+    }
+
+    // Return original or a fallback if parsing fails completely
+    input.to_string()
 }

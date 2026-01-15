@@ -1,0 +1,112 @@
+<p><code>roxide</code> is a lightweight, high-performance alternative to the traditional <code>rm</code>
+command, designed with an emphasis on speed and data preservation. Unlike
+standard rm, which permanently deletes files, roxide safely moves them to a
+designated &quot;<code>trash</code>&quot; directory. This approach enables efficient and fast file
+removal without risking unintended data loss.</p>
+<p><strong>Note</strong>: I am an amateur Rust programmer, so while this code might not be the
+most refined, it prioritizes safety and has been thoroughly tested. If you have
+ideas for improvement or notice any issues, contributions are very welcome! This
+project is open to suggestions, code reviews, and pull requests from developers
+of all experience levels.</p>
+<h2>Getting started</h2>
+<ul>
+<li><code>roxide file.txt</code>: files will moved to <code>trash dir</code>. ie,
+$HOME/.local/share/Trash/files/</li>
+<li><code>roxide revert</code> : restores perviously removed file/directory to its pervious
+path</li>
+<li><code>roxide -r | --recursive</code> : Remove directories and their contents recursively</li>
+<li><code>roxide -f | --force</code> : Remove without moving to trash directory</li>
+<li><code>roxide -v | --verbose</code> : will print the file name and its out path</li>
+<li><code>roxide some/dir/ -p .pdf</code>: will remove files matching the pattern from
+some/dir</li>
+<li><code>roxide some/dir/ -rp .pdf</code>: will recursively remove files matching the
+pattern from some/dir</li>
+<li><code>roxide some/dir/ -rp .pdf -l</code>: will list files, like dry run</li>
+<li><code>roxide some/* -i never</code>: will never prompt</li>
+<li><code>roxide some/* -i once</code>: Prompt once before removing more than three files or
+when removing recursivly</li>
+<li><code>roxide some/* -i always</code>: Prompt before every removal</li>
+<li><code>roxide some/* -p .pdf -i always</code>: Prompt before every removal</li>
+</ul>
+<blockquote>
+<p>[!WARNING]</p>
+<ol>
+<li>Do not use sudo. Support for sudo is still work in progress.</li>
+<li>It wont warn about write protected contents (wip)</li>
+<li>It is not possible to bring back files removed using patterns with <code>revert</code>
+flag but you can still access it from Trash dir</li>
+</ol>
+</blockquote>
+<h2>Installation</h2>
+<h3>Build</h3>
+<pre style="background-color:#2b303b;"><code class="language-bash"><span style="color:#8fa1b3;">git</span><span style="color:#c0c5ce;"> clone https://github.com/abhi-xyz/roxide.git</span><span style="color:#bf616a;"> --depth</span><span style="color:#c0c5ce;">=1 
+</span><span style="color:#96b5b4;">cd</span><span style="color:#c0c5ce;"> roxide
+</span><span style="color:#8fa1b3;">cargo</span><span style="color:#c0c5ce;"> build</span><span style="color:#bf616a;"> --release
+</span><span style="color:#8fa1b3;">cp</span><span style="color:#c0c5ce;"> target/release/roxide /usr/local/bin/
+</span></code></pre>
+<h3>cargo</h3>
+<pre style="background-color:#2b303b;"><code class="language-bash"><span style="color:#8fa1b3;">cargo</span><span style="color:#c0c5ce;"> install roxide
+</span></code></pre>
+<h3>Nixos</h3>
+<p>Add <code>roxide</code> as a flake input: In your flake.nix file, add the roxide input
+pointing to its GitHub repository.</p>
+<pre style="background-color:#2b303b;"><code class="language-nix"><span style="color:#c0c5ce;">{
+</span><span style="color:#c0c5ce;">  inputs = {
+</span><span style="color:#c0c5ce;">    nixpkgs.url = &quot;github:NixOS/nixpkgs&quot;;
+</span><span style="color:#c0c5ce;">    roxide = {
+</span><span style="color:#c0c5ce;">      url = &quot;github:abhi-xyz/roxide&quot;;
+</span><span style="color:#c0c5ce;">      inputs.nixpkgs.follows = &quot;nixpkgs&quot;; # Follows the nixpkgs input
+</span><span style="color:#c0c5ce;">    };
+</span><span style="color:#c0c5ce;">  };
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">  outputs = { self, roxide, nixpkgs, ... }@inputs:
+</span><span style="color:#c0c5ce;">  {
+</span><span style="color:#c0c5ce;">    # Your NixOS configuration or other settings
+</span><span style="color:#c0c5ce;">  };
+</span><span style="color:#c0c5ce;">}
+</span></code></pre>
+<p>Include roxide in NixOS configuration: In the outputs section, set up
+nixosConfigurations and add roxide as a module to enable it within your system
+configuration.</p>
+<pre style="background-color:#2b303b;"><code class="language-nix"><span style="color:#c0c5ce;">{
+</span><span style="color:#c0c5ce;">  outputs = { self, roxide, nixpkgs, ... }@inputs:
+</span><span style="color:#c0c5ce;">  {
+</span><span style="color:#c0c5ce;">    nixosConfigurations.&quot;my-nixos-host&quot; = nixpkgs.lib.nixosSystem {
+</span><span style="color:#c0c5ce;">      system = &quot;x86_64-linux&quot;;
+</span><span style="color:#c0c5ce;">      specialArgs = { inherit inputs; };
+</span><span style="color:#c0c5ce;">      modules = [
+</span><span style="color:#c0c5ce;">        ./hosts/configuration.nix # Main NixOS configuration file
+</span><span style="color:#c0c5ce;">        roxide.nixosModules.roxide      # Enable the &quot;roxide&quot; module from the flake
+</span><span style="color:#c0c5ce;">      ];
+</span><span style="color:#c0c5ce;">    };
+</span><span style="color:#c0c5ce;">  };
+</span><span style="color:#c0c5ce;">}
+</span></code></pre>
+<p>Activate &quot;roxide&quot; in configuration.nix: Within configuration.nix, enable the
+&quot;roxide&quot; program:</p>
+<pre style="background-color:#2b303b;"><code class="language-nix"><span style="color:#c0c5ce;">{
+</span><span style="color:#c0c5ce;">  # Other configurations...
+</span><span style="color:#c0c5ce;">  
+</span><span style="color:#c0c5ce;">  program.roxide.enable = true; # note: its program not programs
+</span><span style="color:#c0c5ce;">}
+</span></code></pre>
+<p>Apply Configuration: After updating your configuration, apply it with:</p>
+<pre style="background-color:#2b303b;"><code class="language-bash"><span style="color:#8fa1b3;">sudo</span><span style="color:#c0c5ce;"> nixos-rebuild switch</span><span style="color:#bf616a;"> --flake</span><span style="color:#c0c5ce;"> .
+</span></code></pre>
+<h2>known bugs</h2>
+<ul>
+<li>won't warn about git directory</li>
+<li>can't use sudo</li>
+<li>~~golb pattern isn't working~~</li>
+<li>~~pattern -flag interfering with other flags~~</li>
+<li>~~cant remove a directory which is inside a directory~~</li>
+</ul>
+<h2>Planned Features</h2>
+<ul>
+<li>~~roxide revert: Restores files from the trash directory to their original
+location.~~</li>
+<li>roxide --gc &lt;TIME_PERIOD&gt;: Performs garbage collection on trashed files,
+automatically clearing files older than a specified period.</li>
+<li>~~roxide -f: Forces deletion without moving files to the trash directory.~~</li>
+<li>roxide -s: Shreds files for secure deletion.</li>
+</ul>
