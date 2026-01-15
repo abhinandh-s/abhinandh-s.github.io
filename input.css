@@ -18,11 +18,13 @@
     src: url("/assets/fonts/Moderustic-VariableFont_wght.ttf") format("woff2");
   }
 
-
+  .markdown-body h1 {
+    @apply text-3xl font-bold my-2;
+  }
   .markdown-body h2 {
     @apply text-2xl font-bold my-2;
   }
- 
+
   .markdown-body h3 {
     @apply font-bold my-2;
   }
@@ -33,69 +35,27 @@
 
   .markdown-body pre {
     @apply !bg-mocha-base dark:!bg-mocha-mantle 
-           !text-latte-text dark:!text-mocha-text 
-           p-4 overflow-x-auto rounded-md my-6; 
+    !text-latte-text dark:!text-mocha-text 
+    p-4 overflow-x-auto rounded-md my-6; 
     font-family: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace;
   }
-
-  /* --- Expanded Syntax Highlighting --- */
-
-  /* 
-  pre .keyword, pre .control { @apply !text-latte-mauve dark:!text-mocha-mauve font-bold; }
-  pre .function, pre .method { @apply !text-latte-blue dark:!text-mocha-blue; }
-  pre .string, pre .char { @apply !text-latte-green dark:!text-mocha-green; }
-  pre .comment { @apply !text-latte-overlay1 dark:!text-mocha-overlay1 italic; }
-  pre .type, pre .class, pre .interface { @apply !text-latte-yellow dark:!text-mocha-yellow; }
-  pre .constant, pre .boolean, pre .language { @apply !text-latte-peach dark:!text-mocha-peach; }
-  pre .number { @apply !text-latte-peach dark:!text-mocha-peach; }
-  pre .operator { @apply !text-latte-sky dark:!text-mocha-sky; }
-  pre .variable, pre .parameter { @apply !text-latte-text dark:!text-mocha-text; }
-  pre .attribute, pre .annotation { @apply !text-latte-blue dark:!text-mocha-blue italic; }
-  pre .heading { @apply !text-latte-red dark:!text-mocha-red font-bold; }
-  pre .link { @apply !text-latte-rosewater dark:!text-mocha-rosewater underline; }
-  pre .punctuation { @apply !text-latte-overlay2 dark:!text-mocha-overlay2; }
-  */
 
   /* Inline code snippets within paragraphs */
   :not(pre) > code {
     @apply bg-latte-surface0 dark:bg-mocha-surface0 
-           text-just-red px-1.5 py-0.5 rounded text-sm font-mono;
+    text-latte-red dark:text-just-red px-1.5 py-0.5 rounded text-sm font-mono;
   }
 
-  /* 1. The Code Block Container */
-  /*
-  .markdown-body pre {
-    @apply my-6 p-4 overflow-x-auto rounded-lg border;
-   */
-    /* Dark mode: Mocha shades | Light mode: Latte shades */
-  /*
-    @apply dark:bg-mocha-base dark:border-mocha-surface0 bg-latte-base border-latte-surface0;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  }
-   */
-
-  /* 2. Inline Code (the one inside paragraphs) */
-  /*
-  .markdown-body :not(pre) > code {
-    @apply px-1.5 py-0.5 rounded font-mono text-sm;
-    @apply dark:bg-mocha-surface0 bg-latte-surface0 text-just-red;
-  }
-   */
-
-  /* Give links pointing to the current page a green color */
-  /*
+  /* Give links pointing to the current page a hover color */
   a[aria-current="page"] {
-  @apply text-just-red;
+    @apply text-just-red;
   }
-   */
-/* Color all ancestor links of the current page */
-/*
-a[aria-current="true"] {
-@apply text-just-red;
-}
- */
+  /* Color all ancestor links of the current page */
+  a[aria-current="true"] {
+    @apply text-just-red;
+  }
 
-p a {
-  @apply !text-just-red;
-}
+  p a {
+    @apply !text-latte-red dark:!text-just-red underline;
+  }
 }

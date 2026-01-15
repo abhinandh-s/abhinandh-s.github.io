@@ -8,13 +8,13 @@ snippet: Neovim plugin for encrypting and decrypting text files inside neovim us
 **Neovim plugin for encrypting and decrypting text files inside neovim using
 `age` with ease.**
 
-## Table of Contents
+# Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
 - [What is age?](#what-is-age)
 
-## Installation
+# Installation
 
 Install Age using your favorite plugin manager. For example, with
 [lazy.nvim](https://github.com/folke/lazy.nvim):
@@ -45,7 +45,7 @@ return {
 }
 ```
 
-## Usage
+# Usage
 
 Age provides the `:Age` command with the following syntax:
 
@@ -58,7 +58,7 @@ Age provides the `:Age` command with the following syntax:
   - `decrypt`,
   - `genkey`
 
-#### Examples:
+## Examples:
 
 - Generates an age key pair into key.txt in current working directory.
 
@@ -89,7 +89,7 @@ encryption tool.
 It features small explicit keys, no config options, and UNIX-style
 composability.
 
-### Why Choose Age Over GPG?
+## Why Choose Age Over GPG?
 
 1. **Simplicity**: Age has a straightforward syntax and intuitive design, making
    it easier to use without extensive documentation.

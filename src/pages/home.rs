@@ -26,7 +26,7 @@ pub fn home_page() -> Html {
            <h1 class="border-l-4 border-l-just-red pl-4 font-bold max-tablet:text-3xl text-4xl mt-12">{ "Recent Posts"}<span class="text-just-red">{ "." }</span></h1>
            <ul class="mt-8">
              {
-               for crate::articles::get_recently_add(5).into_iter().map(|articles| {
+               for crate::articles::get_recently_add(4).into_iter().map(|articles| {
                  html! { <crate::pages::articles::ArticleEntryWithDate post_id={articles.id} /> }
                })
              }
