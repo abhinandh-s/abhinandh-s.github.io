@@ -40,7 +40,6 @@ jobs:
             toolchain: stable
             target: wasm32-unknown-unknown
             override: true
-            # components: rustfmt, clippy
 
       # - name: Run cargo check
       #   uses: actions-rs/cargo@v1
