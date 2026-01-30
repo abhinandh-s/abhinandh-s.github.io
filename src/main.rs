@@ -16,9 +16,9 @@ fn main() {
 #[function_component(App)]
 fn app() -> Html {
     html!(
-        <HashRouter>
+        <BrowserRouter> // HashRouter
             <Switch<Route> render={switch} />
-        </HashRouter>
+        </BrowserRouter>
     )
 }
 
