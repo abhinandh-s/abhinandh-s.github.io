@@ -22,11 +22,11 @@ pub fn home_page() -> Html {
            <h1 class="pt-8 text-2xl font-sans font-bold">{ "Welcome to my corner of Internet"}<span class="text-just-red">{"."}</span></h1>
            <h1 class="border-l-4 border-l-just-red pl-4 font-bold max-tablet:text-3xl text-4xl mt-12">{ "About Me" }<span class="text-just-red">{"."}</span></h1>
            <br />
-           <p>{ format!("I am a {AGE}-years-old guy from India. {ABOUT_ME}") }</p>
+          <p class="pt-3">{ format!("I am a {AGE}-years-old guy from India. {ABOUT_ME}") }</p>
            <h1 class="border-l-4 border-l-just-red pl-4 font-bold max-tablet:text-3xl text-4xl mt-12">{ "Recent Posts"}<span class="text-just-red">{ "." }</span></h1>
            <ul class="mt-8">
              {
-               for crate::articles::get_recently_add(4).into_iter().map(|articles| {
+               for crate::utils::get_recently_add(4).into_iter().map(|articles| {
                  html! { <crate::pages::articles::ArticleEntryWithDate post_id={articles.id} /> }
                })
              }

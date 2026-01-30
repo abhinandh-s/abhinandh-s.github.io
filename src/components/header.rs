@@ -17,7 +17,6 @@ pub fn header() -> Html {
         Callback::from(move |_| is_menu_open.set(!*is_menu_open))
     };
 
-    // Helper for conditional class
     let mobile_menu_class = if *is_menu_open {
         "md:hidden flex flex-col items-center"
     } else {
@@ -40,7 +39,6 @@ pub fn header() -> Html {
 
               /* Mobile Hamburger Menu */
               <div class="hidden max-tablet:flex">
-                // Assuming ThemeToggle is another Yew component
                 <div class="pr-3"></div>
                 <button onclick={toggle_menu} class="focus:outline-none">
                   <svg

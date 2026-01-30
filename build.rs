@@ -6,7 +6,7 @@ use std::{
 
 fn main() {
     let articles_dir = Path::new("articles/published");
-    let out_file = Path::new("src/articles/generated.rs");
+    let out_file = Path::new("src/utils/generated.rs");
 
     println!("cargo:rerun-if-changed=articles/published");
 

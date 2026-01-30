@@ -5,7 +5,7 @@ pub struct ArticleProps {
 
 use yew::prelude::*;
 
-use crate::articles::{get_article_by_id, get_date, markdown_to_html};
+use crate::utils::{get_article_by_id, get_date, markdown_to_html};
 
 
 
@@ -17,7 +17,7 @@ pub fn article_entry_with_date(props: &ArticleProps) -> Html {
 
             html! {
               <li class="border-t broder-latte-text dark:border-mocha-text py-2">
-                <a href={format!("/#/articles/{}", article.id)} class="py-2 flex group gap-4">
+                <a href={format!("/articles/{}", article.id)} class="py-2 flex group gap-4">
                 <div class="w-24 shrink-0"> { date } </div>
                   <div>
                     <h2 class="font-bold group-hover:underline">{ article.matter.title }</h2>
@@ -42,7 +42,7 @@ pub fn article_index() -> Html {
           </h1>
           <ul class="mt-8">
             {
-              for crate::articles::get_all_articles_sorted().into_iter().map(|articles| {
+              for crate::utils::get_all_articles_sorted().into_iter().map(|articles| {
                 html! { <ArticleEntryWithDate post_id={articles.id} /> }
               })
             }

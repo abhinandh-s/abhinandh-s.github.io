@@ -4,7 +4,7 @@ use yew_router::prelude::*;
 
 use self::pages::articles::Article;
 
-mod articles;
+mod utils;
 mod components;
 mod pages;
 mod route;
@@ -16,7 +16,7 @@ fn main() {
 #[function_component(App)]
 fn app() -> Html {
     html!(
-        <BrowserRouter> // HashRouter
+        <BrowserRouter> // `HashRouter` is needed for github pages
             <Switch<Route> render={switch} />
         </BrowserRouter>
     )
