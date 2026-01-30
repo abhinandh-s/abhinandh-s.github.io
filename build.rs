@@ -55,6 +55,10 @@ fn main() {
     let out_file = Path::new("assets/articles/feed.json");
     let mut json_feed = File::create(out_file).expect("Failed to create feed.json");
     write!(json_feed, "{}", generate_json_feed()).unwrap();
+
+    fs::write("assets/articles/feed.xml", generate_rss_feed()).unwrap();
+
+    fs::write("assets/articles/feed.atom", generate_atom_feed()).unwrap();
 }
 
 use serde::{Deserialize, Serialize};
@@ -206,10 +210,12 @@ pub fn markdown_to_html(source: &str) -> String {
     comrak::markdown_to_html_with_plugins(source, &options, &plugins)
 }
 
+pub const SITE_URL: &str = "https://abhinandh-s.github.io/";
+pub const SITE_LANGUAGE: &str = "en-us";
 pub const VERSION: &str = "https://jsonfeed.org/version/1.1";
 pub const TITLE: &str = "Abhi's Feed";
-pub const HOME_PAGE_URL: &str = "https://abhinandh-s.github.io/#/";
-pub const FEED_URL: &str = "https://abhinandh-s.github.io/#/feed.json";
+pub const HOME_PAGE_URL: &str = "https://abhinandh-s.github.io/";
+pub const FEED_URL: &str = "https://abhinandh-s.github.io/feed.json";
 pub const DESCRIPTION: &str = "Json feed for articles written by Abhinandh S";
 pub const ICON: &str = "https://example.org/favicon-timeline-512x512.png";
 pub const FAVICON: &str = "https://example.org/favicon-sourcelist-64x64.png";
@@ -277,4 +283,100 @@ pub fn format_rfc3339(input: &str) -> String {
 
     // Return original or a fallback if parsing fails completely
     input.to_string()
+}
+
+fn generate_rss_feed() -> String {
+    let articles = get_all_articles_sorted();
+
+    let mut items = String::new();
+
+    for article in articles {
+        items.push_str(&format!(
+            r#"
+      <item>
+        <title><![CDATA[{title}]]></title>
+        <link>{site}articles/{id}</link>
+        <guid>{site}articles/{id}</guid>
+        <pubDate>{date}</pubDate>
+        <description><![CDATA[{summary}]]></description>
+        <content:encoded><![CDATA[{content}]]></content:encoded>
+      </item>
+"#,
+            title = article.matter.title,
+            id = article.id,
+            site = SITE_URL,
+            date = format_rfc3339(&article.matter.published_at),
+            summary = article.matter.snippet,
+            content = article.content
+        ));
+    }
+
+    format!(
+        r#"<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>{title}</title>
+    <link>{site}</link>
+    <description>{desc}</description>
+    <language>{lang}</language>
+    {items}
+  </channel>
+</rss>
+"#,
+        title = TITLE,
+        site = SITE_URL,
+        desc = DESCRIPTION,
+        lang = SITE_LANGUAGE,
+        items = items
+    )
+}
+
+fn generate_atom_feed() -> String {
+    let articles = get_all_articles_sorted();
+
+    let updated = articles
+        .first()
+        .map(|a| format_rfc3339(&a.matter.published_at))
+        .unwrap_or_else(|| chrono::Utc::now().to_rfc3339());
+
+    let mut entries = String::new();
+
+    for article in articles {
+        entries.push_str(&format!(
+            r#"
+  <entry>
+    <title>{title}</title>
+    <link href="{site}articles/{id}"/>
+    <id>{site}articles/{id}</id>
+    <updated>{updated}</updated>
+    <summary>{summary}</summary>
+    <content type="html"><![CDATA[{content}]]></content>
+  </entry>
+"#,
+            title = article.matter.title,
+            id = article.id,
+            site = SITE_URL,
+            updated = format_rfc3339(&article.matter.published_at),
+            summary = article.matter.snippet,
+            content = article.content
+        ));
+    }
+
+    format!(
+        r#"<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{title}</title>
+  <link href="{site}"/>
+  <link href="{site}atom.xml" rel="self"/>
+  <updated>{updated}</updated>
+  <id>{site}</id>
+  {entries}
+</feed>
+"#,
+        title = TITLE,
+        site = SITE_URL,
+        updated = updated,
+        entries = entries
+    )
 }
