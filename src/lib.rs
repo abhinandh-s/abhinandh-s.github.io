@@ -1,4 +1,5 @@
 use route::Route;
+use wasm_bindgen::prelude::*;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
@@ -8,10 +9,6 @@ mod utils;
 mod components;
 mod pages;
 mod route;
-
-fn main() {
-    yew::Renderer::<App>::new().render();
-}
 
 #[function_component(App)]
 fn app() -> Html {
@@ -31,4 +28,10 @@ fn switch(routes: Route) -> Html {
         Route::About => html! { <pages::about::About /> },
         Route::NotFound => html! { <pages::_404::NotFound /> },
     }
+}
+
+#[wasm_bindgen]
+pub async fn render() -> String {
+    let renderer = yew::ServerRenderer::<App>::new();
+    renderer.render().await
 }
