@@ -24,8 +24,7 @@ fn switch(routes: Route) -> Html {
 
 #[function_component(App)]
 fn app(props: &AppProps) -> Html {
-    // 1. Logic outside the html! macro
-    let content = if !props.path.is_empty() {
+     if !props.path.is_empty() {
         // SERVER PATH: Use the provided path from Deno
         let history = AnyHistory::from(MemoryHistory::new());
         history.push(&props.path);
@@ -41,10 +40,7 @@ fn app(props: &AppProps) -> Html {
                 <Switch<Route> render={switch} />
             </BrowserRouter>
         }
-    };
-
-    // 2. Return the result
-    content
+    }
 }
 
 #[derive(Clone, PartialEq, Properties)]
