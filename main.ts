@@ -15,7 +15,7 @@ serve(async (req) => {
   if (
     url.pathname.startsWith("/static/") ||
     url.pathname.startsWith("/pkg/") ||
-    url.pathname.includes("favicon") ||
+    url.pathname.includes("favicon")
   ) {
     return serveDir(req, { fsRoot: "." });
   }
