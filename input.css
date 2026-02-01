@@ -58,4 +58,8 @@
   p a {
     @apply !text-latte-red dark:!text-just-red underline;
   }
+
+  body {
+    @apply h-lvh p-2 dark:bg-mocha-crust bg-latte-crust dark:text-mocha-text text-latte-text;
+  }
 }
