@@ -11,6 +11,7 @@ pub fn home_page() -> Html {
     html! {
       <>
         <Header />
+        <main>
         <div
          id="wrapper"
          class="p-2 mx-auto max-w-3xl flex flex-col justify-center">
@@ -34,6 +35,7 @@ pub fn home_page() -> Html {
           <div class="border-b broder-latte-text dark:border-mocha-text"></div>
           <Footer />
           </div>
+        </main>
       </>
     }
 }

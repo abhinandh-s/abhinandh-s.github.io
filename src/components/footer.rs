@@ -88,6 +88,7 @@ pub fn footer() -> Html {
           <a
             class="text-just-red"
             href="https://yew.rs"
+            aria-label="Link to framework used"
             target="_blank"
           >
           { "Yew"}
@@ -97,6 +98,7 @@ pub fn footer() -> Html {
           <a
             class="text-just-red"
             href="https://opensource.org/license/mit"
+            aria-label="Link to Code License"
             target="_blank"
           >
           { "MIT License" }
@@ -105,6 +107,7 @@ pub fn footer() -> Html {
           <a
             class="text-just-red"
             href="https://github.com/abhinandh-s/abhinandh-s.github.io"
+            aria-label="GitHub Profile"
             target="_blank"
           >
           { "here" }
@@ -112,6 +115,7 @@ pub fn footer() -> Html {
           <a
             class="text-just-red"
             href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+            aria-label="Link to Articles License"
             target="_blank"
           >
           {"Creative Commons"}
