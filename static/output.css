@@ -694,6 +694,24 @@ p a {
   }
 }
 
+body {
+  height: 100lvh;
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 224 232 / var(--tw-bg-opacity, 1));
+  padding: 0.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(76 79 105 / var(--tw-text-opacity, 1));
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 17 27 / var(--tw-bg-opacity, 1));
+    --tw-text-opacity: 1;
+    color: rgb(205 214 244 / var(--tw-text-opacity, 1));
+  }
+}
+
 .left-0 {
   left: 0px;
 }

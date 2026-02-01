@@ -34,7 +34,7 @@ serve(async (req) => {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Abhinandh S</title>
     
-    <link rel="stylesheet" href="./static/output.css"/>
+    <link rel="stylesheet" href="/static/output.css"/>
     
     <link rel="icon" href="/static/favicon/favicon.png" type="image/png" />
     <link rel="icon" href="/static/favicon/favicon.svg" type="image/svg+xml" />
