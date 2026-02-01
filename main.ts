@@ -22,6 +22,12 @@ serve(async (req) => {
     return serveDir(req, { fsRoot: "." });
   }
 
+  if (url.pathname === "/robots.txt") {
+    return new Response("User-agent: *\nAllow: /", {
+      headers: { "content-type": "text/plain" },
+    });
+  }
+
   try {
     const appHtml = await render(url.pathname);
 
@@ -38,7 +44,8 @@ serve(async (req) => {
     
     <link rel="stylesheet" href="/static/output.css"/>
   
-    <link rel="preload" href="/pkg/yew_blog_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+    <link rel="modulepreload" href="/pkg/yew_blog.js">
+    <link rel="preload" href="/pkg/yew_blog_bg.wasm" as="fetch" type="application/wasm" crossorigin="anonymous">
 
     <script type="module">
       import init from "/pkg/yew_blog.js";
@@ -61,12 +68,11 @@ serve(async (req) => {
 
     `;
 
-  return new Response(html, {
-    headers: { "content-type": "text/html; charset=utf-8" },
-  });
+    return new Response(html, {
+      headers: { "content-type": "text/html; charset=utf-8" },
+    });
   } catch (err) {
     console.error("SSR Rendering Error:", err);
     return new Response("Internal Server Error", { status: 500 });
-    
   }
 });
