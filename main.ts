@@ -16,11 +16,17 @@ serve(async (req) => {
     url.pathname.startsWith("/static/") ||
     url.pathname.startsWith("/pkg/") ||
     url.pathname.includes("favicon") ||
-    url.pathname.endsWith(".json") ||
-    url.pathname.endsWith(".xml")
   ) {
     return serveDir(req, { fsRoot: "." });
   }
+
+if (url.pathname.endsWith(".json") || url.pathname.endsWith(".xml")) {
+  return serveDir(req, { 
+    fsRoot: "static", 
+    urlRoot: "" 
+  });
+}
+
 
   if (url.pathname === "/robots.txt") {
     return new Response("User-agent: *\nAllow: /", {
