@@ -24,7 +24,7 @@ fn switch(routes: Route) -> Html {
 
 #[function_component(App)]
 fn app(props: &AppProps) -> Html {
-     if !props.path.is_empty() {
+    if !props.path.is_empty() {
         // SERVER PATH: Use the provided path from Deno
         let history = AnyHistory::from(MemoryHistory::new());
         history.push(&props.path);
@@ -50,7 +50,7 @@ pub struct AppProps {
 
 #[wasm_bindgen]
 pub async fn render(path: String) -> String {
-       let renderer = LocalServerRenderer::<App>::with_props(AppProps { path });
+    let renderer = LocalServerRenderer::<App>::with_props(AppProps { path });
     renderer.render().await
 }
 
@@ -65,11 +65,14 @@ pub fn run_app() {
         let document = web_sys::window().unwrap().document().unwrap();
         if let Some(root) = document.get_element_by_id("app") {
             yew::Renderer::<App>::with_root_and_props(
-                root, 
-                AppProps { path: String::new() }
-            ).hydrate();
+                root,
+                AppProps {
+                    path: String::new(),
+                },
+            )
+            .hydrate();
         }
     }
-    // If not in browser (i.e., Deno), do nothing and let 
+    // If not in browser (i.e., Deno), do nothing and let
     // the 'render' function be called manually.
 }

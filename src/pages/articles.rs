@@ -7,8 +7,6 @@ use yew::prelude::*;
 
 use crate::utils::{get_article_by_id, get_date, markdown_to_html};
 
-
-
 #[function_component(ArticleEntryWithDate)]
 pub fn article_entry_with_date(props: &ArticleProps) -> Html {
     match get_article_by_id(&props.post_id) {
@@ -54,7 +52,7 @@ pub fn article_index() -> Html {
     }
 }
 
-// https://abhinandh-s.github.io/#/articles/:post 
+// https://abhinandh-s.github.io/#/articles/:post
 //                                            ^
 //                                            this page
 #[function_component(Article)]

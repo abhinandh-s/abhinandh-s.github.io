@@ -20,13 +20,12 @@ serve(async (req) => {
     return serveDir(req, { fsRoot: "." });
   }
 
-if (url.pathname.endsWith(".json") || url.pathname.endsWith(".xml")) {
-  return serveDir(req, { 
-    fsRoot: "static", 
-    urlRoot: "" 
-  });
-}
-
+  if (url.pathname.endsWith(".json") || url.pathname.endsWith(".xml")) {
+    return serveDir(req, {
+      fsRoot: "static",
+      urlRoot: "",
+    });
+  }
 
   if (url.pathname === "/robots.txt") {
     return new Response("User-agent: *\nAllow: /", {

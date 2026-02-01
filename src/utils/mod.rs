@@ -54,10 +54,7 @@ pub fn get_all_articles_sorted() -> Vec<Article> {
 
 // For home page
 pub fn get_recently_add(limit: usize) -> Vec<Article> {
-    get_all_articles_sorted()
-        .into_iter()
-        .take(limit)
-        .collect()
+    get_all_articles_sorted().into_iter().take(limit).collect()
 }
 
 // input: `2026-01-12 21:34`
@@ -66,14 +63,11 @@ pub fn get_date(input: &str, long: bool) -> String {
     // 1. Parse the input string based on its format
     // %Y-%m-%d %H:%M matches "YYYY-MM-DD HH:MM"
     match chrono::NaiveDate::parse_from_str(input, "%Y-%m-%d") {
-    // 2. Format it to the desired output: "Monday, January 12, 2026"
-    // %A = Full weekday, %B = Full month, %e = Day of month, %Y = Year
-        Ok(date_time) => {
-            match long {
-                true => date_time.format("%A, %B %e, %Y").to_string(),
-                false => date_time.format("%b %d, %Y").to_string(),
-            }
-            
+        // 2. Format it to the desired output: "Monday, January 12, 2026"
+        // %A = Full weekday, %B = Full month, %e = Day of month, %Y = Year
+        Ok(date_time) => match long {
+            true => date_time.format("%A, %B %e, %Y").to_string(),
+            false => date_time.format("%b %d, %Y").to_string(),
         },
         Err(err) => err.to_string(),
     }
@@ -89,7 +83,9 @@ InspiredGitHub from here
 Solarized (dark) and Solarized (light)
  */
 pub fn markdown_to_html(source: &str) -> String {
-    let adapter = SyntectAdapterBuilder::new().theme("base16-ocean.dark").build();
+    let adapter = SyntectAdapterBuilder::new()
+        .theme("base16-ocean.dark")
+        .build();
     let options = comrak::Options::default();
     let mut plugins = comrak::options::Plugins::default();
 

@@ -1,5 +1,5 @@
-pub mod home;
-pub mod articles;
-pub mod portfolio;
-pub mod about;
 pub mod _404;
+pub mod about;
+pub mod articles;
+pub mod home;
+pub mod portfolio;
