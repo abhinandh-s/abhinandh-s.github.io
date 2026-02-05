@@ -8,6 +8,7 @@ pub fn movies_page() -> Html {
         "five_feet_apart",
         "before_sunrise",
         "before_sunset",
+        "before_midnight",
         "nightcrawler",
         "drive",
         "la_la_land",
@@ -17,19 +18,19 @@ pub fn movies_page() -> Html {
         "shutter_island",
         "ironman",
         "jhon_wick",
+        "top_gun",
+        "dune",
     ];
 
     html! {
         <>
             <crate::components::header::Header />
-            <main class="w-full">
                 // Responsive masonry columns
                 <div style="columns: 300px;">
                     { for pins.into_iter().map(|id| html! {
                         <MovieEmbed path={id} />
                     }) }
                 </div>
-            </main>
             <crate::components::footer::Footer />
         </>
     }
