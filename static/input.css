@@ -3,8 +3,8 @@
 
 @theme {
   /* --- Custom Breakpoints --- */
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
+  --breakpoint-md: 640px;
+  --breakpoint-lg: 950px;
   --breakpoint-xl: 1280px;
 
   /* --- Custom Fonts --- */

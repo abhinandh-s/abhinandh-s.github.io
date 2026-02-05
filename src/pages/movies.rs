@@ -20,6 +20,7 @@ pub fn movies_page() -> Html {
         "jhon_wick",
         "top_gun",
         "dune",
+        "ts_red",
     ];
 
     html! {
@@ -28,22 +29,15 @@ pub fn movies_page() -> Html {
                 // Responsive masonry columns
                 <div style="columns: 300px;">
                     { for pins.into_iter().map(|id| html! {
-                        <MovieEmbed path={id} />
+                         <img
+                             src={format!("static/movies/{}.avif", &id)}
+                             alt="No Description"
+                             loading="lazy"
+                             class="max-w-full h-auto py-2"
+                         />
                     }) }
                 </div>
             <crate::components::footer::Footer />
         </>
-    }
-}
-
-#[derive(Properties, PartialEq)]
-pub struct MovieProps {
-    pub path: AttrValue,
-}
-
-#[function_component(MovieEmbed)]
-pub fn pinterest_embed(props: &MovieProps) -> Html {
-    html! {
-        <img src={format!("static/movies/{}.avif", &props.path)} alt="No Description" loading="lazy" class="max-w-full h-auto py-2" />
     }
 }
