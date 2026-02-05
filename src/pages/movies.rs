@@ -23,20 +23,20 @@ pub fn movies_page() -> Html {
         "ts_red",
     ];
 
+                // Responsive masonry columns
     html! {
         <>
             <crate::components::header::Header />
-                // Responsive masonry columns
-                // <div style="columns: 300px;">
-                //     { for pins.into_iter().map(|id| html! {
-                //          <img
-                //              src={format!("static/movies/{}.avif", &id)}
-                //              alt="No Description"
-                //              loading="lazy"
-                //              class="max-w-full h-auto py-2"
-                //          />
-                //     }) }
-                // </div>
+                <div style="columns: 300px;">
+                    { for pins.into_iter().map(|id| html! {
+                         <img
+                             src={format!("static/movies/{}.avif", &id)}
+                             alt="No Description"
+                             loading="lazy"
+                             class="max-w-full h-auto py-2"
+                         />
+                    }) }
+                </div>
             <crate::components::footer::Footer />
         </>
     }
