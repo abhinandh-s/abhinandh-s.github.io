@@ -202,16 +202,15 @@ pub fn movies_page() -> Html {
     // Responsive masonry columns
     html! {
         <>
-            <crate::components::header::Header />
-
-        <div class="p-4 mx-auto max-w-3xl flex flex-col justify-center">
-                <div style="columns: 300px;" class="!text-mocha-text dark:!text-latte-text">
+          <crate::components::header::Header />
+            <div class="p-4 mx-auto max-w-3xl flex flex-col justify-center">
+              <div style="columns: 300px;" class="!text-mocha-text dark:!text-latte-text">
                 { for movies.into_iter().map(|movie| html! {
-                    movie
+                  movie
                 }) }
-                </div>
-                </div>
+              </div>
             <crate::components::footer::Footer />
+          </div>
         </>
     }
 }

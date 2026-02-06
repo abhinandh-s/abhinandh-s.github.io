@@ -14,9 +14,16 @@ pub fn about_page() -> Html {
 
                 <h1 class="border-l-4 border-l-just-red pl-4 font-bold max-tablet:text-3xl text-4xl mt-12">{ "Interests" }<span class="text-just-red">{"."}</span></h1>
                 <div class="pt-8"></div>
-                <p>{ "some of my fav movies and series are listed down" }</p>
-                <Link<Route> to={Route::Movies} classes="text-just-red dark:text-just-red underline transition-colors duration-200">{ "Movies" }</Link<Route>>
-    
+                <p class="">
+                    { "Some of my favorite movies and series are listed here: " }
+                    <Link<Route> 
+                        to={Route::Movies} 
+                        classes="text-just-red dark:text-just-red underline transition-colors duration-200"
+                    >
+                        { "Movies" }
+                    </Link<Route>>
+                </p>
+
                 <crate::components::footer::Footer />
             </div>
             </>

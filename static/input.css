@@ -107,55 +107,53 @@
 }
 
 @layer utilities {
-  /* --- Base Typography --- */
-.polaroid_wrapper p {
-  font-family: 'Kalam', cursive;
-  line-height: 1.2;
-  font-weight: 400;
-  margin: 0;
-  color: #2e3440;
-}
+  .polaroid_wrapper p {
+    font-family: 'Kalam', cursive;
+    line-height: 1.2;
+    font-weight: 400;
+    margin: 0;
+    color: #2e3440;
+  }
 
-.polaroid_wrapper h1 {
-  margin: 0;    
-  font-family: 'Permanent Marker', cursive;
-  font-size: 1.3rem;
-}
+  .polaroid_wrapper h1 {
+    @apply text-mocha-crust;
+    margin: 0;    
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.3rem;
+  }
 
-.polaroid_wrapper h4 {
-  margin: 0; 
-  font-size: 1.0rem; 
-  opacity: 0.8;
-}
+  .polaroid_wrapper h4 {
+    margin: 0; 
+    font-size: 1.0rem; 
+    opacity: 0.8;
+  }
 
-.polaroid_wrapper {
-  display: inline-block;
-  margin-bottom: 20px;
-  background-color: #bac2de;
-  background-image: url('https://www.transparenttextures.com/patterns/60-lines.png');
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-  width: 100%;   
-  padding: 15px;
-  box-sizing: border-box; /* Ensures padding doesn't break the width */
-  break-inside: avoid;    /* CRITICAL: stops weird spacing/breaks */
-}
+  .polaroid_wrapper {
+    @apply shadow-2xl shadow-mocha-crust dark:shadow-mocha-surface2;
+    display: inline-block;
+    margin-bottom: 20px;
+    background-color: #bac2de;
+    background-image: url('https://www.transparenttextures.com/patterns/60-lines.png');
+    width: 100%;   
+    padding: 15px;
+    box-sizing: border-box; /* Ensures padding doesn't break the width */
+    break-inside: avoid;    /* CRITICAL: stops weird spacing/breaks */
+  }
 
-.polaroid_wrapper img {
-  width: 100%;
-  height: auto;           /* Use auto for a more natural masonry feel, or keep 260px */
-  aspect-ratio: 1/1;      /* Keeps them square like real Polaroids */
-  display: block;
-  object-fit: cover;
-  margin-bottom: 15px;
-  border: 1px solid rgba(0,0,0,0.1);
-}
+  .polaroid_wrapper img {
+    width: 100%;
+    height: auto;           /* Use auto for a more natural masonry feel, or keep 260px */
+    aspect-ratio: 1/1;      /* Keeps them square like real Polaroids */
+    display: block;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
 
-
-.polaroid_wrapper_ctx {
-  display: flex;
-  justify-content: space-between; 
-  align-items: baseline;
-  color: #2e3440;
-}
-
+  .polaroid_wrapper_ctx {
+    @apply text-mocha-surface1;
+    display: flex;
+    justify-content: space-between; 
+    align-items: baseline;
+  }
 }
