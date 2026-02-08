@@ -316,7 +316,7 @@ pub fn tag_cloud(props: &TagCloudProps) -> Html {
     let tags = crate::utils::get_articles_by_tag();
 
     html! {
-        <div class="py-4">
+        <div class="pb-4 mt-16">
             <h3 class="text-subtext1 font-bold mb-4 uppercase text-xs tracking-widest">{"Tags"}</h3>
             <div class="flex flex-wrap gap-2">
                 { for tags.iter().map(|(tag, posts)| {
