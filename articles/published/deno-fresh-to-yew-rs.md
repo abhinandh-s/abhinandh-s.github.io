@@ -3,6 +3,7 @@ title: Yew.rs and SSR - The Circle of Migration
 published_at: 2026-02-06
 updated_at: 2026-02-06
 snippet: How I finally achieved the "Rust Dream" by migrating from Deno Fresh to Yew.rs with SSR.
+tags: ["rust", "blog"]
 ---
 
 Years ago, when i dicided to build my own website, first thing i looked for was

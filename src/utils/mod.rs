@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use comrak::plugins::syntect::SyntectAdapterBuilder;
 use serde::{Deserialize, Serialize};
 use syntect::highlighting::ThemeSet;
@@ -76,6 +78,20 @@ pub fn get_date(input: &str, long: bool) -> String {
 
 pub fn get_article_by_id(id: &str) -> Option<Article> {
     get_all_articles().into_iter().find(|f| f.id == id)
+}
+
+pub fn get_articles_by_tag() -> HashMap<String, Vec<Article>> {
+    let mut tag_map: HashMap<String, Vec<Article>> = HashMap::new();
+    let articles = get_all_articles();
+
+    for article in articles {
+        if let Some(tags) = &article.matter.tags {
+            for tag in tags {
+                tag_map.entry(tag.clone()).or_default().push(article.clone());
+            }
+        }
+    }
+    tag_map
 }
 
 /*

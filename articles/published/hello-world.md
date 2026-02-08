@@ -3,6 +3,7 @@ title: Hello World
 published_at: 2024-06-26
 updated_at: 2024-06-26
 snippet: My first blog entry.
+tags: ["blog", "test", "markdown"]
 ---
 
 Welcome to my first blog post! This content is written in Markdown and styled
