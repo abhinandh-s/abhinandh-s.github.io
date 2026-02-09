@@ -168,7 +168,7 @@ pub fn article_index() -> Html {
               <p class="text-center text-subtext0 mt-10">{"No articles match your search."}</p>
           }
 
-          <div class="border-b border-surface1 mt-12"></div>
+          <div class="border-b border-surface1"></div>
           <crate::components::footer::Footer />
         </div>
       </>
@@ -322,7 +322,7 @@ pub fn tag_cloud(props: &TagCloudProps) -> Html {
     tags.sort_by(|a, b| a.0.to_lowercase().cmp(&b.0.to_lowercase()));
 
     html! {
-        <div class="pb-4 mt-16">
+        <div class="pb-4 mt-8">
             <h3 class="text-subtext1 font-bold mb-4 uppercase text-xs tracking-widest">{"Tags"}</h3>
             <div class="flex flex-wrap gap-2">
                 { for tags.iter().map(|(tag, posts)| {
