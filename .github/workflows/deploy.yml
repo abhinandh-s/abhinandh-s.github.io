@@ -39,6 +39,9 @@ jobs:
       - name: Build Wasm SSR Bundle
         run: wasm-pack build --target web --release
 
+      - name: List all # to know what to exlude in deno.json
+        run: ls -lah
+
       - name: update tailwindcss
         uses: ZoeyVid/tailwindcss-update@main
         with:
