@@ -1,0 +1,51 @@
+name: Deploy Yew site to GitHub Pages
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    name: Rust project
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rust Cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install latest stable
+        uses: actions-rs/toolchain@v1
+        with:
+            toolchain: stable
+            target: wasm32-unknown-unknown
+            override: true
+
+      - name: Install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+      - name: Generate feeds
+        run: cargo run 
+
+      - name: Build Wasm SSR Bundle
+        run: wasm-pack build --target web --release
+
+      - name: List all # to know what to exlude in deno.json
+        run: ls -lah
+
+      - name: update tailwindcss
+        uses: ZoeyVid/tailwindcss-update@main
+        with:
+          input: static/input.css
+          output: static/output.css
+          params: "--minify"
