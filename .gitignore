@@ -1,5 +1,5 @@
 /target
 /dist
-
+/pkg
 /static/feed.*
 /static/output.css

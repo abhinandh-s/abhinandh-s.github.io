@@ -71,7 +71,7 @@ fn search_bar(props: &SearchBarProps) -> Html {
                     type="text"
                     placeholder="Search articles..."
                     value={props.value.clone()}
-                    class="w-full bg-surface0 text-text p-3 rounded-lg border border-surface1 focus:border-just-red outline-none transition-all"
+                    class="w-full bg-mocha-surface0 text-text p-3 rounded-lg border border-surface1 focus:border-just-red outline-none transition-all"
                     oninput={props.on_input.clone()}
                 />
 
