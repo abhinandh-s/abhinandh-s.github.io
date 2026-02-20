@@ -190,7 +190,7 @@
   /* } */
 
   a[aria-current="page"], a[aria-current="true"] {
-    @apply text-just-red;
+    @apply text-latte-red dark:text-just-red;
   }
 
   p {
@@ -237,9 +237,9 @@
   .markdown li input[type="checkbox"] {
     /* Using your Mocha Green */
     @apply mr-2 h-4 w-4 cursor-pointer appearance-none rounded 
-    border-2 border-mocha-red bg-transparent
-    checked:bg-mocha-blue checked:border-mocha-blue
-    focus:ring-offset-0 focus:ring-1 focus:ring-mocha-blue
+    border-2 border-latte-red dark:border-mocha-red bg-transparent
+    checked:bg-latte-blue checked:border-latte-blue dark:checked:bg-mocha-blue dark:checked:border-mocha-blue
+    focus:ring-offset-0 focus:ring-1 focus:ring-latte-blue dark:focus:ring-mocha-blue
     transition-all duration-200;
 
     vertical-align: middle;
@@ -261,7 +261,7 @@
   .markdown .spoiler {
     /* Base style: Hide the text */
     @apply cursor-help rounded-sm px-2 transition-all duration-300;
-    @apply bg-mocha-red text-transparent select-none;
+    @apply bg-latte-red dark:bg-mocha-red text-transparent select-none;
 
     /* Optional: subtle blur effect */
     filter: blur(4px);
@@ -269,12 +269,12 @@
 
   /* Reveal on Hover */
   .markdown .spoiler:hover {
-    @apply text-mocha-green bg-transparent select-auto;
+    @apply text-latte-green dark:text-mocha-green bg-transparent select-auto;
     filter: blur(0);
   }
 
   .markdown .spoiler:active {
-  @apply text-mocha-green bg-transparent;
+  @apply text-latte-green dark:text-mocha-green bg-transparent;
   filter: blur(0);
 }
 

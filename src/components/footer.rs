@@ -12,6 +12,7 @@ pub fn footer() -> Html {
           <a
             class="p-2"
             href="https://github.com/abhinandh-s/"
+            aria-label="GitHub Profile"
             target="_blank"
           >
             <svg
@@ -107,7 +108,7 @@ pub fn footer() -> Html {
           {"and is available"} {" "}
           <a
             class="text-just-red"
-            href="https://github.com/abhinandh-s/abhinandh-s.github.io"
+            href="https://github.com/abhinandh-s/abhinandhs.deno.dev"
             aria-label="GitHub Profile"
             target="_blank"
           >
