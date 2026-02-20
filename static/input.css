@@ -1,5 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Kalam:wght@300;400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+/* Fira Code Variable (The 300 700 range covers all weights) */
+@font-face {
+  font-family: 'Fira Code';
+  src: url('fonts/FiraCode-VF.woff2') format('woff2-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Kalam - Mapping the individual TTF files */
+@font-face {
+  font-family: 'Kalam';
+  src: url('fonts/Kalam/Kalam-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kalam';
+  src: url('fonts/Kalam/Kalam-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kalam';
+  src: url('fonts/Kalam/Kalam-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Permanent Marker */
+@font-face {
+  font-family: 'Permanent Marker';
+  src: url('fonts/Permanent_Marker/PermanentMarker-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 @import "tailwindcss" source("../src");
 
@@ -269,20 +309,20 @@ h6:hover a[id^="md-heading-"]::before {
     border-radius: 0.3rem;
   }
 
-  .markdown-alert-important{ @apply border-mocha-mauve; }
-  .markdown-alert-important .markdown-alert-title { @apply text-mocha-mauve; }
+  .markdown-alert-important{ @apply border-latte-mauve dark:border-mocha-mauve; }
+  .markdown-alert-important .markdown-alert-title { @apply text-latte-mauve dark:text-mocha-mauve; }
 
-  .markdown-alert-note{ @apply border-mocha-blue; }
-  .markdown-alert-note .markdown-alert-title { @apply text-mocha-blue; }
+  .markdown-alert-note{ @apply border-latte-blue dark:border-mocha-blue; }
+  .markdown-alert-note .markdown-alert-title { @apply text-latte-blue dark:text-mocha-blue; }
 
-  .markdown-alert-tip{ @apply border-mocha-green; }
-  .markdown-alert-tip .markdown-alert-title { @apply text-mocha-green; }
+  .markdown-alert-tip{ @apply border-latte-green dark:border-mocha-green; }
+  .markdown-alert-tip .markdown-alert-title { @apply text-latte-green dark:text-mocha-green; }
 
-  .markdown-alert-warning{ @apply border-mocha-yellow; }
-  .markdown-alert-warning .markdown-alert-title { @apply text-mocha-yellow; }
+  .markdown-alert-warning{ @apply border-latte-yellow dark:border-mocha-yellow; }
+  .markdown-alert-warning .markdown-alert-title { @apply border-latte-yellow dark:text-mocha-yellow; }
 
-  .markdown-alert-caution{ @apply border-mocha-red; }
-  .markdown-alert-caution .markdown-alert-title { @apply text-mocha-red; }
+  .markdown-alert-caution{ @apply border-latte-red dark:border-mocha-red; }
+  .markdown-alert-caution .markdown-alert-title { @apply text-latte-red dark:text-mocha-red; }
 
   /* The title (Note, Warning, etc.) */
   .markdown-alert-title {
