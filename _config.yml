@@ -1,0 +1,13 @@
+heretitle: My Personal Site
+author: Abhinandh S
+description: >- # this means to ignore newlines until next key
+  A simple Jekyll site hosted on GitHub Pages.
+theme: minima
+plugins:
+  - jekyll-feed
+
+# This controls the links in the top navigation bar
+header_pages:
+  - portfolio.md
+  - blog.md
+  - about.md
