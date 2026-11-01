@@ -12,7 +12,7 @@ Home Page
 ] <home>
 
 #webpage("excel.html", [Excel], pdf-path: "book.pdf")[
-  #include "excel.typ"
+  #include "excel/mod.typ"
 ] <excel>
 
 #asset("favicon.ico", read("/images/favicon.ico", encoding: none))
