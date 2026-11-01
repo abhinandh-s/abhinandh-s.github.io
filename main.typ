@@ -6,8 +6,14 @@
   #html.link(rel: "icon", href: "favicon.ico", type: "image/x-icon")
 ])
 
+=== Hello, I'am
+= Abhinandh S.
 
-Home Page
+*Welcome to my corner of Internet.*
+
+== About Me.
+
+I am a 23-years-old guy from India. I'm currently a CMA student at Biswas Institute of Management Studies, Kerala, India. I spend some of my time messing around with computers and software. This site is a home for my psychological dysfunctioning. It's a place where I'm in control; no algorithms, no censorship, and no manipulation. Just raw thoughts and code.
 
 ] <home>
 
