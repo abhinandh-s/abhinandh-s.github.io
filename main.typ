@@ -1,6 +1,6 @@
 #import "@local/ui:0.1.0": *
 
-#webpage("index.html", [Home], pdf-path: "book.pdf")[
+#webpage("index.html", [Home], show-pdf: false)[
   #html.head([
   #html.link(rel: "icon", href: "favicon.svg", type: "image/svg+xml")
   #html.link(rel: "icon", href: "favicon.ico", type: "image/x-icon")
@@ -17,7 +17,7 @@ I am a 23-years-old guy from India. I'm currently a CMA student at Biswas Instit
 
 ] <home>
 
-#webpage("excel.html", [Excel], pdf-path: "book.pdf")[
+#webpage("excel.html", [Excel], show-pdf: false)[
   #include "excel/mod.typ"
 ] <excel>
 
